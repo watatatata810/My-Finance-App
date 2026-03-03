@@ -34,6 +34,10 @@ Route (app)
 ✓ Finalizing page optimization
 ```
 
+### Vercel デプロイ確認
+- 環境変数 (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`) を設定し、本番環境での正常稼働（500 エラーの解消）を確認しました。
+- ブラウザから各ページ（ダッシュボード、分析、設定）にアクセス可能な状態です。
+
 ### クイック入力 API テスト
 APIキーを使用した取引登録が、以下の通り成功することを確認済みです：
 - **リクエスト**: `POST /api/transactions` (JSON)
