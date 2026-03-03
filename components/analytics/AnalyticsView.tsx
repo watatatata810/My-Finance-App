@@ -5,7 +5,7 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import { formatCurrency } from '@/lib/utils';
-import { TrendingUp, TrendingDown, CircleDollarSign, BarChart3, CalendarDays, Wallet } from 'lucide-react';
+import { TrendingUp, TrendingDown, CircleDollarSign, BarChart3, CalendarDays } from 'lucide-react';
 
 interface AnalyticsProps {
     monthlyTrend: {
@@ -135,7 +135,8 @@ export default function AnalyticsView({
                             <XAxis dataKey="month" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
                             <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 11 }} tickFormatter={(v) => `¥${(v / 10000).toFixed(0)}万`} />
                             <Tooltip
-                                formatter={(v: number, name: string) => [formatCurrency(v), name]}
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                formatter={((v: number | undefined, name: string | undefined) => [v != null ? formatCurrency(v) : '', name ?? '']) as any}
                                 contentStyle={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: 12 }}
                                 labelStyle={{ color: 'var(--text-muted)' }}
                             />
