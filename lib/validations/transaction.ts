@@ -13,8 +13,8 @@ export const transactionSchema = z.object({
     place: z.string().max(100, '場所は100文字以内で入力してください').nullable().optional(),
     creditCardId: z.string().nullable().optional(),
     creditCardName: z.string().max(50, 'カード名は50文字以内で入力してください').nullable().optional(), // 互換性のために残す
-    tags: z.array(z.string()).default([]),
-    isAutoPayment: z.boolean().default(false),
+    tags: z.array(z.string()),
+    isAutoPayment: z.boolean(),
 }).refine((data) => {
     if (data.type === 'expense') return !!data.fromAccountId;
     if (data.type === 'income') return !!data.toAccountId;

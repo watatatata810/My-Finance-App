@@ -2,42 +2,42 @@ import type { Account, Category, Transaction, AutoPayment, DepreciableAsset, Sal
 
 // === 口座 ===
 export const accounts: Account[] = [
-    { id: 'acc-cash', name: '現金', type: 'cash', isLiquid: true, balance: 9870, color: '#22c55e', icon: 'Wallet' },
-    { id: 'acc-rakuten', name: '楽天銀行', type: 'bank', isLiquid: true, balance: 16823, color: '#bf0000', icon: 'Building2' },
-    { id: 'acc-yucho', name: 'ゆうちょ', type: 'bank', isLiquid: true, balance: 330396, color: '#0066cc', icon: 'Building2' },
-    { id: 'acc-smbc', name: '三井住友銀行', type: 'bank', isLiquid: true, balance: 185366, color: '#006633', icon: 'Building2' },
-    { id: 'acc-sbi', name: '住信SBI', type: 'bank', isLiquid: true, balance: 969597, color: '#003399', icon: 'Building2' },
-    { id: 'acc-paypay', name: 'PayPay', type: 'epay', isLiquid: true, balance: 14233, color: '#ff0033', icon: 'Smartphone' },
-    { id: 'acc-pasmo', name: 'PASMO', type: 'epay', isLiquid: true, balance: 10572, color: '#e91e8c', icon: 'CreditCard' },
-    { id: 'acc-merpay', name: 'メルペイ', type: 'epay', isLiquid: true, balance: 27774, color: '#4dc4ff', icon: 'Smartphone' },
-    { id: 'acc-credit', name: 'クレジットカード', type: 'credit', isLiquid: true, balance: -1313386, color: '#6b7280', icon: 'CreditCard' },
-    { id: 'acc-nisa', name: 'SBI積立NISA', type: 'investment', isLiquid: false, balance: 997539, color: '#8b5cf6', icon: 'TrendingUp' },
-    { id: 'acc-sbi-sec', name: 'SBI証券', type: 'investment', isLiquid: false, balance: 250000, color: '#7c3aed', icon: 'TrendingUp' },
-    { id: 'acc-deprec', name: '償却資産', type: 'asset', isLiquid: false, balance: 510381, color: '#f59e0b', icon: 'Package' },
+    { id: 'acc-cash', userId: 'mock-user', name: '現金', type: 'cash', isLiquid: true, initialBalance: 0, balance: 9870, color: '#22c55e', icon: 'Wallet', sortOrder: 0 },
+    { id: 'acc-rakuten', userId: 'mock-user', name: '楽天銀行', type: 'bank', isLiquid: true, initialBalance: 0, balance: 16823, color: '#bf0000', icon: 'Building2', sortOrder: 1 },
+    { id: 'acc-yucho', userId: 'mock-user', name: 'ゆうちょ', type: 'bank', isLiquid: true, initialBalance: 0, balance: 330396, color: '#0066cc', icon: 'Building2', sortOrder: 2 },
+    { id: 'acc-smbc', userId: 'mock-user', name: '三井住友銀行', type: 'bank', isLiquid: true, initialBalance: 0, balance: 185366, color: '#006633', icon: 'Building2', sortOrder: 3 },
+    { id: 'acc-sbi', userId: 'mock-user', name: '住信SBI', type: 'bank', isLiquid: true, initialBalance: 0, balance: 969597, color: '#003399', icon: 'Building2', sortOrder: 4 },
+    { id: 'acc-paypay', userId: 'mock-user', name: 'PayPay', type: 'epay', isLiquid: true, initialBalance: 0, balance: 14233, color: '#ff0033', icon: 'Smartphone', sortOrder: 5 },
+    { id: 'acc-pasmo', userId: 'mock-user', name: 'PASMO', type: 'epay', isLiquid: true, initialBalance: 0, balance: 10572, color: '#e91e8c', icon: 'CreditCard', sortOrder: 6 },
+    { id: 'acc-merpay', userId: 'mock-user', name: 'メルペイ', type: 'epay', isLiquid: true, initialBalance: 0, balance: 27774, color: '#4dc4ff', icon: 'Smartphone', sortOrder: 7 },
+    { id: 'acc-credit', userId: 'mock-user', name: 'クレジットカード', type: 'credit', isLiquid: true, initialBalance: 0, balance: -1313386, color: '#6b7280', icon: 'CreditCard', sortOrder: 8 },
+    { id: 'acc-nisa', userId: 'mock-user', name: 'SBI積立NISA', type: 'investment', isLiquid: false, initialBalance: 0, balance: 997539, color: '#8b5cf6', icon: 'TrendingUp', sortOrder: 9 },
+    { id: 'acc-sbi-sec', userId: 'mock-user', name: 'SBI証券', type: 'investment', isLiquid: false, initialBalance: 0, balance: 250000, color: '#7c3aed', icon: 'TrendingUp', sortOrder: 10 },
+    { id: 'acc-deprec', userId: 'mock-user', name: '償却資産', type: 'asset', isLiquid: false, initialBalance: 0, balance: 510381, color: '#f59e0b', icon: 'Package', sortOrder: 11 },
 ];
 
 // === カテゴリ ===
 export const categories: Category[] = [
-    { id: 'cat-food', name: '食品', type: 'expense', color: '#ef4444', icon: 'UtensilsCrossed' },
-    { id: 'cat-snack', name: '間食', type: 'expense', color: '#f97316', icon: 'Cookie' },
-    { id: 'cat-hobby', name: '趣味・娯楽', type: 'expense', color: '#8b5cf6', icon: 'Gamepad2' },
-    { id: 'cat-transport', name: '交通費', type: 'expense', color: '#3b82f6', icon: 'Train' },
-    { id: 'cat-fixed', name: '固定費', type: 'expense', color: '#6b7280', icon: 'Home' },
-    { id: 'cat-sub', name: 'サブスク', type: 'expense', color: '#ec4899', icon: 'RefreshCw' },
-    { id: 'cat-daily', name: '日用品', type: 'expense', color: '#14b8a6', icon: 'ShoppingBag' },
-    { id: 'cat-useful', name: '便利アイテム', type: 'expense', color: '#06b6d4', icon: 'Lightbulb' },
-    { id: 'cat-tools', name: '道具類', type: 'expense', color: '#a855f7', icon: 'Wrench' },
-    { id: 'cat-beauty', name: '美容費', type: 'expense', color: '#ec4899', icon: 'Sparkles' },
-    { id: 'cat-clothes', name: '被服費', type: 'expense', color: '#f43f5e', icon: 'Shirt' },
-    { id: 'cat-medical', name: '医療費', type: 'expense', color: '#10b981', icon: 'Heart' },
-    { id: 'cat-telecom', name: '通信費', type: 'expense', color: '#2563eb', icon: 'Wifi' },
-    { id: 'cat-social', name: '交際費', type: 'expense', color: '#d946ef', icon: 'Users' },
-    { id: 'cat-depreciation', name: '減価償却', type: 'expense', color: '#78716c', icon: 'Calculator' },
-    { id: 'cat-misc', name: '雑費', type: 'expense', color: '#9ca3af', icon: 'MoreHorizontal' },
-    { id: 'cat-special', name: '特別費', type: 'expense', color: '#eab308', icon: 'Star' },
-    { id: 'cat-salary', name: '給与', type: 'income', color: '#22c55e', icon: 'Banknote' },
-    { id: 'cat-freelance', name: 'フリーランス', type: 'income', color: '#10b981', icon: 'Briefcase' },
-    { id: 'cat-other-income', name: 'その他収入', type: 'income', color: '#84cc16', icon: 'Plus' },
+    { id: 'cat-food', userId: 'mock-user', name: '食品', type: 'expense', color: '#ef4444', icon: 'UtensilsCrossed', sortOrder: 0 },
+    { id: 'cat-snack', userId: 'mock-user', name: '間食', type: 'expense', color: '#f97316', icon: 'Cookie', sortOrder: 1 },
+    { id: 'cat-hobby', userId: 'mock-user', name: '趣味・娯楽', type: 'expense', color: '#8b5cf6', icon: 'Gamepad2', sortOrder: 2 },
+    { id: 'cat-transport', userId: 'mock-user', name: '交通費', type: 'expense', color: '#3b82f6', icon: 'Train', sortOrder: 3 },
+    { id: 'cat-fixed', userId: 'mock-user', name: '固定費', type: 'expense', color: '#6b7280', icon: 'Home', sortOrder: 4 },
+    { id: 'cat-sub', userId: 'mock-user', name: 'サブスク', type: 'expense', color: '#ec4899', icon: 'RefreshCw', sortOrder: 5 },
+    { id: 'cat-daily', userId: 'mock-user', name: '日用品', type: 'expense', color: '#14b8a6', icon: 'ShoppingBag', sortOrder: 6 },
+    { id: 'cat-useful', userId: 'mock-user', name: '便利アイテム', type: 'expense', color: '#06b6d4', icon: 'Lightbulb', sortOrder: 7 },
+    { id: 'cat-tools', userId: 'mock-user', name: '道具類', type: 'expense', color: '#a855f7', icon: 'Wrench', sortOrder: 8 },
+    { id: 'cat-beauty', userId: 'mock-user', name: '美容費', type: 'expense', color: '#ec4899', icon: 'Sparkles', sortOrder: 9 },
+    { id: 'cat-clothes', userId: 'mock-user', name: '被服費', type: 'expense', color: '#f43f5e', icon: 'Shirt', sortOrder: 10 },
+    { id: 'cat-medical', userId: 'mock-user', name: '医療費', type: 'expense', color: '#10b981', icon: 'Heart', sortOrder: 11 },
+    { id: 'cat-telecom', userId: 'mock-user', name: '通信費', type: 'expense', color: '#2563eb', icon: 'Wifi', sortOrder: 12 },
+    { id: 'cat-social', userId: 'mock-user', name: '交際費', type: 'expense', color: '#d946ef', icon: 'Users', sortOrder: 13 },
+    { id: 'cat-depreciation', userId: 'mock-user', name: '減価償却', type: 'expense', color: '#78716c', icon: 'Calculator', sortOrder: 14 },
+    { id: 'cat-misc', userId: 'mock-user', name: '雑費', type: 'expense', color: '#9ca3af', icon: 'MoreHorizontal', sortOrder: 15 },
+    { id: 'cat-special', userId: 'mock-user', name: '特別費', type: 'expense', color: '#eab308', icon: 'Star', sortOrder: 16 },
+    { id: 'cat-salary', userId: 'mock-user', name: '給与', type: 'income', color: '#22c55e', icon: 'Banknote', sortOrder: 17 },
+    { id: 'cat-freelance', userId: 'mock-user', name: 'フリーランス', type: 'income', color: '#10b981', icon: 'Briefcase', sortOrder: 18 },
+    { id: 'cat-other-income', userId: 'mock-user', name: 'その他収入', type: 'income', color: '#84cc16', icon: 'Plus', sortOrder: 19 },
 ];
 
 // === 場所リスト ===
@@ -100,14 +100,20 @@ function generateTransactions(): Transaction[] {
 
                 txns.push({
                     id: `txn-${id++}`,
+                    userId: 'mock-user',
                     date: dateStr,
                     type: 'expense',
                     amount,
                     categoryId: cat.id,
                     fromAccountId: fromAcc,
+                    toAccountId: null,
                     description: desc,
                     place,
+                    creditCardName: fromAcc === 'acc-credit' ? '楽天カード' : null,
+                    source: 'manual',
                     tags: [],
+                    isAutoPayment: false,
+                    createdAt: new Date().toISOString(),
                 });
             }
         }
@@ -116,9 +122,9 @@ function generateTransactions(): Transaction[] {
         if (month <= 2) {
             const dateStr = `2026-${String(month).padStart(2, '0')}-01`;
             txns.push(
-                { id: `txn-${id++}`, date: dateStr, type: 'expense', amount: 54300, categoryId: 'cat-fixed', fromAccountId: 'acc-yucho', description: '家賃', place: 'ネット', tags: [] },
-                { id: `txn-${id++}`, date: dateStr, type: 'expense', amount: 17510, categoryId: 'cat-fixed', fromAccountId: 'acc-credit', description: '国民年金', place: 'ネット', tags: [] },
-                { id: `txn-${id++}`, date: dateStr, type: 'expense', amount: 21000, categoryId: 'cat-fixed', fromAccountId: 'acc-credit', description: '国民健康保険', place: 'ネット', tags: [] },
+                { id: `txn-${id++}`, userId: 'mock-user', date: dateStr, type: 'expense', amount: 54300, categoryId: 'cat-fixed', fromAccountId: 'acc-yucho', toAccountId: null, description: '家賃', place: 'ネット', creditCardName: null, source: 'manual', tags: [], isAutoPayment: true, createdAt: new Date().toISOString() },
+                { id: `txn-${id++}`, userId: 'mock-user', date: dateStr, type: 'expense', amount: 17510, categoryId: 'cat-fixed', fromAccountId: 'acc-credit', toAccountId: null, description: '国民年金', place: 'ネット', creditCardName: '楽天カード', source: 'manual', tags: [], isAutoPayment: true, createdAt: new Date().toISOString() },
+                { id: `txn-${id++}`, userId: 'mock-user', date: dateStr, type: 'expense', amount: 21000, categoryId: 'cat-fixed', fromAccountId: 'acc-credit', toAccountId: null, description: '国民健康保険', place: 'ネット', creditCardName: '楽天カード', source: 'manual', tags: [], isAutoPayment: true, createdAt: new Date().toISOString() },
             );
         }
 
@@ -128,14 +134,20 @@ function generateTransactions(): Transaction[] {
             const salary = month === 1 ? 153181 : 199580;
             txns.push({
                 id: `txn-${id++}`,
+                userId: 'mock-user',
                 date: dateStr,
                 type: 'income',
                 amount: salary,
                 categoryId: 'cat-freelance',
-                fromAccountId: 'acc-sbi',
+                fromAccountId: null,
+                toAccountId: 'acc-sbi',
                 description: month === 1 ? 'SP給与' : 'TwoFace給与',
                 place: '',
+                creditCardName: null,
+                source: 'manual',
                 tags: [],
+                isAutoPayment: false,
+                createdAt: new Date().toISOString(),
             });
         }
 
@@ -143,15 +155,20 @@ function generateTransactions(): Transaction[] {
         if (month <= 2) {
             txns.push({
                 id: `txn-${id++}`,
+                userId: 'mock-user',
                 date: `2026-${String(month).padStart(2, '0')}-15`,
                 type: 'transfer',
                 amount: 30000,
-                categoryId: '',
+                categoryId: null,
                 fromAccountId: 'acc-sbi',
                 toAccountId: 'acc-cash',
                 description: '生活費引き出し',
                 place: '',
+                creditCardName: null,
+                source: 'manual',
                 tags: [],
+                isAutoPayment: false,
+                createdAt: new Date().toISOString(),
             });
         }
     }
@@ -232,15 +249,17 @@ export function formatCurrency(amount: number): string {
     return `¥${amount.toLocaleString('ja-JP')}`;
 }
 export function getTotalAssets(): number {
-    return accounts.reduce((sum, a) => sum + a.balance, 0);
+    return accounts.reduce((sum, a) => sum + (a.balance || 0), 0);
 }
 export function getLiquidAssets(): number {
-    return accounts.filter(a => a.isLiquid).reduce((sum, a) => sum + a.balance, 0);
+    return accounts.filter(a => a.isLiquid).reduce((sum, a) => sum + (a.balance || 0), 0);
 }
 export function getExpenseByCategory(txns: Transaction[]): { name: string; value: number; color: string }[] {
     const map = new Map<string, number>();
     txns.filter(t => t.type === 'expense').forEach(t => {
-        map.set(t.categoryId, (map.get(t.categoryId) || 0) + t.amount);
+        if (t.categoryId) {
+            map.set(t.categoryId, (map.get(t.categoryId) || 0) + t.amount);
+        }
     });
     return Array.from(map.entries())
         .map(([catId, value]) => {
