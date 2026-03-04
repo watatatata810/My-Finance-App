@@ -47,6 +47,7 @@ export async function createTransaction(input: TransactionInput) {
         to_account_id: result.data.toAccountId || null,
         description: result.data.description || null,
         place: result.data.place || null,
+        place_category: result.data.placeCategory || null,
         credit_card_id: result.data.creditCardId || null,
         credit_card_name: result.data.creditCardName || null,
         tags: result.data.tags || [],

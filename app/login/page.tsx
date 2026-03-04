@@ -1,4 +1,5 @@
 import { login, signup } from './actions';
+import { SubmitButton } from './SubmitButton';
 
 export default function LoginPage({
     searchParams,
@@ -55,18 +56,20 @@ export default function LoginPage({
                         )}
 
                         <div className="flex flex-col gap-3">
-                            <button
+                            <SubmitButton
+                                pendingText="ログイン中..."
                                 formAction={login}
                                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors shadow-lg"
                             >
                                 ログイン
-                            </button>
-                            <button
+                            </SubmitButton>
+                            <SubmitButton
+                                pendingText="登録処理中..."
                                 formAction={signup}
                                 className="w-full bg-transparent hover:bg-white/5 text-gray-400 border border-[#333] font-medium py-2 rounded-lg transition-all text-sm"
                             >
                                 新規登録（メール確認が必要です）
-                            </button>
+                            </SubmitButton>
                         </div>
                     </form>
                 </div>

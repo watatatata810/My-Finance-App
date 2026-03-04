@@ -26,6 +26,8 @@ export interface Category {
     sortOrder: number;
 }
 
+export type PlaceCategory = 'net' | 'convenience' | 'supermarket' | 'restaurant' | 'vending' | 'other';
+
 export interface Transaction {
     id: string;
     userId: string;
@@ -37,6 +39,7 @@ export interface Transaction {
     toAccountId: string | null;
     description: string | null;
     place: string | null;
+    placeCategory: PlaceCategory | null;
     creditCardName: string | null;
     source: 'manual' | 'api' | 'csv_import';
     tags: string[];

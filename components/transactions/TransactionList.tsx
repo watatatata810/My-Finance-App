@@ -1,11 +1,23 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Search, Filter, ArrowUpDown, ChevronDown, Loader2, Calendar } from 'lucide-react';
+import {
+    Search, Filter, ArrowUpDown, ChevronDown, Loader2, Calendar,
+    Globe, Store, ShoppingCart, Utensils, Box, HelpCircle
+} from 'lucide-react';
 import { getTransactions } from '@/lib/actions/transactions';
 import { formatCurrency } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 import { useDebounce } from '@/hooks/use-debounce';
+
+const PLACE_ICON_MAP: Record<string, any> = {
+    net: Globe,
+    convenience: Store,
+    supermarket: ShoppingCart,
+    restaurant: Utensils,
+    vending: Box,
+    other: HelpCircle,
+};
 
 interface TransactionListProps {
     initialTransactions: any[];
@@ -174,7 +186,7 @@ export function TransactionList({
                                 <th className="px-6 py-4">日付</th>
                                 <th className="px-6 py-4">種別</th>
                                 <th className="px-6 py-4">カテゴリ</th>
-                                <th className="px-6 py-4">内容 / 場所</th>
+                                <th className="px-6 py-4">内容 / メモ</th>
                                 <th className="px-6 py-4">口座</th>
                                 <th className="px-6 py-4 text-right">金額</th>
                             </tr>
@@ -207,8 +219,16 @@ export function TransactionList({
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex flex-col">
-                                            <span className="font-bold text-[var(--text-primary)]">{txn.description || '内容なし'}</span>
-                                            {txn.place && <span className="text-[10px] text-[var(--text-muted)] line-clamp-1">at {txn.place}</span>}
+                                            <div className="flex items-center gap-1.5 font-bold text-[var(--text-primary)]">
+                                                {txn.place_category && PLACE_ICON_MAP[txn.place_category] && (
+                                                    (() => {
+                                                        const Icon = PLACE_ICON_MAP[txn.place_category];
+                                                        return <Icon size={12} className="text-[var(--text-muted)]" />;
+                                                    })()
+                                                )}
+                                                {txn.description || '内容なし'}
+                                            </div>
+                                            {txn.place && <span className="text-[10px] text-[var(--text-muted)] line-clamp-1">{txn.place}</span>}
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
@@ -238,10 +258,18 @@ export function TransactionList({
                         <div key={txn.id} className="p-4 flex items-center justify-between active:bg-[var(--bg-hover)] transition-colors">
                             <div className="flex items-center gap-4">
                                 <div
-                                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-inner"
+                                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-inner relative"
                                     style={{ background: `${txn.categories?.color || '#94a3b8'}15` }}
                                 >
                                     {txn.type === 'income' ? '💰' : txn.type === 'transfer' ? '🔁' : txn.type === 'adjustment' ? '⚖️' : '🧾'}
+                                    {txn.place_category && PLACE_ICON_MAP[txn.place_category] && (
+                                        <div className="absolute -bottom-1 -right-1 bg-[var(--bg-card)] p-0.5 rounded-full border border-[var(--border)]">
+                                            {(() => {
+                                                const Icon = PLACE_ICON_MAP[txn.place_category];
+                                                return <Icon size={10} className="text-[var(--text-muted)]" />;
+                                            })()}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="space-y-0.5">
                                     <p className="font-bold text-sm text-[var(--text-primary)] line-clamp-1">{txn.description || '内容なし'}</p>

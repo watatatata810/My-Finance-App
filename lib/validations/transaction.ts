@@ -11,6 +11,7 @@ export const transactionSchema = z.object({
     toAccountId: z.string().nullable().optional(),
     description: z.string().max(200, '内容は200文字以内で入力してください').nullable().optional(),
     place: z.string().max(100, '場所は100文字以内で入力してください').nullable().optional(),
+    placeCategory: z.string().nullable().optional(),
     creditCardId: z.string().nullable().optional(),
     creditCardName: z.string().max(50, 'カード名は50文字以内で入力してください').nullable().optional(), // 互換性のために残す
     tags: z.array(z.string()),

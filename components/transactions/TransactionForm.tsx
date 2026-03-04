@@ -5,10 +5,22 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { transactionSchema, TransactionInput } from '@/lib/validations/transaction';
 import { createTransaction } from '@/lib/actions/transactions';
-import { ArrowLeft, Save, Loader2, AlertCircle } from 'lucide-react';
+import {
+    ArrowLeft, Save, Loader2, AlertCircle,
+    Globe, Store, ShoppingCart, Utensils, Box, HelpCircle
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+
+const PLACE_CATEGORIES = [
+    { value: 'net', label: 'ネット', icon: Globe },
+    { value: 'convenience', label: 'コンビニ', icon: Store },
+    { value: 'supermarket', label: 'スーパー・小売', icon: ShoppingCart },
+    { value: 'restaurant', label: '飲食店', icon: Utensils },
+    { value: 'vending', label: '自動販売機', icon: Box },
+    { value: 'other', label: 'その他', icon: HelpCircle },
+];
 
 interface TransactionFormProps {
     accounts: any[];
@@ -82,8 +94,17 @@ export default function TransactionForm({ accounts, categories, creditCards = []
                     disabled={isSubmitting}
                     className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-6 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[var(--accent)]/20"
                 >
-                    {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-                    <span>保存</span>
+                    {isSubmitting ? (
+                        <>
+                            <Loader2 size={18} className="animate-spin" />
+                            <span>保存中...</span>
+                        </>
+                    ) : (
+                        <>
+                            <Save size={18} />
+                            <span>保存</span>
+                        </>
+                    )}
                 </button>
             </div>
 
@@ -241,14 +262,42 @@ export default function TransactionForm({ accounts, categories, creditCards = []
                         className="w-full bg-[var(--bg-secondary)] border border-[var(--border)] rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                     />
                 </div>
-                <div className="space-y-2">
-                    <label className="text-xs font-bold text-[var(--text-muted)] px-1">場所</label>
-                    <input
-                        type="text"
-                        {...register('place')}
-                        placeholder="例: イオン、ローソン"
-                        className="w-full bg-[var(--bg-secondary)] border border-[var(--border)] rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
-                    />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-[var(--text-muted)] px-1">詳細 / メモ</label>
+                        <input
+                            type="text"
+                            {...register('place')}
+                            placeholder="例: イオン、ローソン、または備考など"
+                            className="w-full bg-[var(--bg-secondary)] border border-[var(--border)] rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-[var(--text-muted)] px-1">場所(大分類)</label>
+                        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                            {PLACE_CATEGORIES.map((cat) => {
+                                const Icon = cat.icon;
+                                const isSelected = watch('placeCategory') === cat.value;
+                                return (
+                                    <button
+                                        key={cat.value}
+                                        type="button"
+                                        onClick={() => setValue('placeCategory', isSelected ? null : cat.value as any)}
+                                        className={cn(
+                                            "flex flex-col items-center justify-center p-2 rounded-xl border transition-all gap-1",
+                                            isSelected
+                                                ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--accent)]"
+                                                : "bg-[var(--bg-secondary)] border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--text-muted)]"
+                                        )}
+                                        title={cat.label}
+                                    >
+                                        <Icon size={16} />
+                                        <span className="text-[9px] whitespace-nowrap">{cat.label}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
